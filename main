@@ -4,20 +4,36 @@ puts "Welcome to the tic tac toe game"
 puts "Are you ready to play the game ? Y/N"
 
 user_response = gets.chomp()
+# options = new Array ([1..9])
+options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+player_one_options = []
+player_two_options = []
+
+def tic_tac_toe_game (player_one_p, player_two_p)
+    puts "#{player_one_p}, please select a number"
+    puts "   1  *   2   *   3   "
+    puts "      *       *       "
+    puts "      *       *       "
+    puts "* * * * * * * * * * * "
+    puts "      *       *       "
+    puts "   4  *   5   *   6   "
+    puts "      *       *       "
+    puts "* * * * * * * * * * * "
+    puts "      *       *       "
+    puts "   7  *    8  *   9  "
+    puts "      *       *       "
+    player_one_option = gets.chomp()
+    if options.include?(player_one_option)
+        player_one_options << player_one_options #update the player_one_options array
+    else
+        puts "Please put a correct option"
+        puts "Option is supposed to be one of #{options}"
+    end
+
+end
 
 if user_response.upcase == "Y"
     # Play the game
-    # puts "   1  *   2   *   3   "
-    # puts "      *       *       "
-    # puts "      *       *       "
-    # puts "* * * * * * * * * * * "
-    # puts "      *       *       "
-    # puts "   4  *   5   *   6   "
-    # puts "      *       *       "
-    # puts "* * * * * * * * * * * "
-    # puts "      *       *       "
-    # puts "   7  *    8   *   9  "
-    # puts "      *       *       "
     puts "Player one, please enter name?"
     player_one = gets.chomp()
     if player_one.length >= 2 
@@ -35,24 +51,11 @@ if user_response.upcase == "Y"
     puts "Name should be atleast two characters"
     end
     # Playing the Game
-    puts "#{player_one}, please select a number"
-    puts "   1  *   2   *   3   "
-    puts "      *       *       "
-    puts "      *       *       "
-    puts "* * * * * * * * * * * "
-    puts "      *       *       "
-    puts "   4  *   5   *   6   "
-    puts "      *       *       "
-    puts "* * * * * * * * * * * "
-    puts "      *       *       "
-    puts "   7  *    8  *   9  "
-    puts "      *       *       "
-    player_one_option = gets.chomp()
+    tic_tac_toe_game(player_one, player_two)
 elsif user_response.upcase == "N"
     # Close the game
     puts "Great! You could check later when you're ready"
 else
   puts "Incorrect Option, please enter a valid response"
-
-
 end
+
