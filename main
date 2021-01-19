@@ -7,17 +7,52 @@ user_response = gets.chomp()
 
 if user_response.upcase == "Y"
     # Play the game
-    puts "      *       *       "
+    # puts "   1  *   2   *   3   "
+    # puts "      *       *       "
+    # puts "      *       *       "
+    # puts "* * * * * * * * * * * "
+    # puts "      *       *       "
+    # puts "   4  *   5   *   6   "
+    # puts "      *       *       "
+    # puts "* * * * * * * * * * * "
+    # puts "      *       *       "
+    # puts "   7  *    8   *   9  "
+    # puts "      *       *       "
+    puts "Player one, please enter name?"
+    player_one = gets.chomp()
+    if player_one.length >= 2 
+      puts "Welcome #{player_one}"
+      puts "Player two, Please enter your name"
+      player_two = gets.chomp()
+      if player_one.length >= 2 
+        puts "Welcome #{player_two}"
+      else
+        puts "Please enter a valid name"
+        puts "Name should be atleast two characters"
+      end
+    else
+    puts "Please enter a valid name"
+    puts "Name should be atleast two characters"
+    end
+    # Playing the Game
+    puts "#{player_one}, please select a number"
+    puts "   1  *   2   *   3   "
     puts "      *       *       "
     puts "      *       *       "
     puts "* * * * * * * * * * * "
     puts "      *       *       "
-    puts "      *       *       "
+    puts "   4  *   5   *   6   "
     puts "      *       *       "
     puts "* * * * * * * * * * * "
     puts "      *       *       "
+    puts "   7  *    8  *   9  "
     puts "      *       *       "
-    puts "      *       *       "
+    player_one_option = gets.chomp()
 elsif user_response.upcase == "N"
     # Close the game
+    puts "Great! You could check later when you're ready"
+else
+  puts "Incorrect Option, please enter a valid response"
+
+
 end
