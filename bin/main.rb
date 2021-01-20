@@ -30,41 +30,6 @@ def play_the_game(player_name, int)
   end
 end
 
-# def tic_tac_toe_game(player_one_p, player_two_p)
-#   options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-#   options_copy = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-#   player_one_options = []
-#   player_two_options = []
-#   puts "#{player_one_p}, please select a number between these options"
-#   display_game_status(options)
-#   player_one_option = gets.chomp
-#   player_one_option = player_one_option.to_i
-#   if options_copy.include?(player_one_option)
-#     options_copy = options_copy.reject { |choice| choice == player_one_option }
-#     options[player_one_option - 1] = 'x'
-#     puts "#{player_two_p} Please select a number between "
-#     display_game_status(options)
-#     player_two_option = gets.chomp
-#     player_two_option = player_two_option.to_i
-#     if options_copy.include?(player_two_option)
-#       player_two_options << player_two_option
-#       options_copy = options_copy.reject { |choice| choice == player_two_option }
-#       options[player_two_option - 1] = 'o'
-#       puts "#{player_one_p} Please select a number between"
-#       display_game_status(options)
-#       # puts player_one_options
-#       # puts player_two_options
-#       # puts options_copy
-#     else
-#       puts 'Please put a correct option'
-#       puts "Option is supposed to be one of #{options_copy}"
-#     end
-#   else
-#     puts 'Please put a correct option'
-#     puts "Option is supposed to be one of #{options_copy}"
-#   end
-# end
-
 def ask_the_name(player)
   puts "#{player}, please put your name"
   player_name = gets.chomp
