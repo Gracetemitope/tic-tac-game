@@ -1,7 +1,7 @@
 # !/usr/bin/env ruby
 
-OPTIONS= [1, 2, 3, 4, 5, 6, 7, 8, 9]
-OPTIONS_COPY = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9].freeze
+$options_copy = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def display_game_status(options_p)
   puts '      *       *      '
@@ -22,8 +22,8 @@ def play_the_game(player_name, int)
   display_game_status(OPTIONS)
   player_option = gets.chomp
   player_option = player_option.to_i
-  if OPTIONS_COPY.include?(player_option)
-    OPTIONS_COPY = OPTIONS_COPY.reject { |choice| choice == player_option }
+  if $options_copy.include?(player_option)
+    $options_copy = $options_copy.reject { |choice| choice == player_option }
     OPTIONS[player_option - 1] = int.odd? ? 'o' : 'x'
   else
     play_the_game(play_the_game, int)
