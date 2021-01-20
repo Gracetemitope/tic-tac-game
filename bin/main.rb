@@ -12,6 +12,17 @@ def display_game_status(options_p)
   puts "   #{options_p[6]}  *    #{options_p[7]}  *   #{options_p[8]}   "
   puts '      *       *       '
 end
+def play_the_game(player_name, options, options_copy)
+ puts "#{player_name}, Please pick an option"
+display_game_status(options)
+player_option = gets.chomp()
+player_option = player_option.to_i
+if options_copy.include?(player_option)
+    options_copy = options_copy.reject { |choice| choice == player_option }
+else 
+  
+end
+end
 
 # def tic_tac_toe_game(player_one_p, player_two_p)
 #   options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -23,7 +34,6 @@ end
 #   player_one_option = gets.chomp
 #   player_one_option = player_one_option.to_i
 #   if options_copy.include?(player_one_option)
-#     player_one_options << player_one_option # update the player_one_options array
 #     options_copy = options_copy.reject { |choice| choice == player_one_option }
 #     options[player_one_option - 1] = 'x'
 #     puts "#{player_two_p} Please select a number between "
@@ -76,13 +86,16 @@ when 'Y'
   end
   puts "#{players}"
 
+  options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  options_copy = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   9.times do |i|
     if i.odd?
       #second player has to play
-      play_the_game(players[1])
+
+      play_the_game(players[1], options, options_copy)
     elsif i.even?
       # it's first player's turn
-      play_the_game(players[1])
+      play_the_game(players[0], options, options_copy)
     else
       #end the game
     end
