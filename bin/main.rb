@@ -96,8 +96,10 @@ when 'Y'
   puts "It's a drawing move, #{player_one.name} wins the game"
 
   puts "It's a winning move, #{player_two.name} wins the game"
+
   display_game_status(player_two.options_to_display)
 when 'N'
+  # Compute if it is a draw with conditions
   # Close the game
   puts 'Great! You could check later when youre ready'
 else
