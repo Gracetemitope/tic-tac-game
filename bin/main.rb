@@ -16,7 +16,9 @@ class Player
       @options_to_display[player_option - 1] = symbol
     else
       puts 'Please select a correct option'
-      update_options(player_option, symbol)
+      player_option_p = gets.chomp
+      player_option_p = player_option_p.to_i
+      update_options(player_option_p, symbol)
     end
   end
 end
@@ -91,6 +93,9 @@ when 'Y'
     j += 1
     finished = true if j >= 9
   end
+  puts "It's a drawing move, #{player_one.name} wins the game"
+
+  puts "It's a winning move, #{player_two.name} wins the game"
   display_game_status(player_two.options_to_display)
 when 'N'
   # Close the game
