@@ -1,3 +1,4 @@
+# !/usr/bin/env ruby
 #!/usr/bin/env ruby
 
 def display_game_status (options_p)
@@ -81,4 +82,5 @@ elsif user_response.upcase == "N"
 else
   puts "Incorrect Option, please enter a valid response"
 end
+
 
