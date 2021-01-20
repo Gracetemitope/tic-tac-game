@@ -1,7 +1,8 @@
 # !/usr/bin/env ruby
 
-OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9].freeze
-$options_copy = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+options_copy = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+updated_options = []
 
 def display_game_status(options_p)
   puts '      *       *      '
@@ -17,17 +18,19 @@ def display_game_status(options_p)
   puts '      *       *       '
 end
 
-def play_the_game(player_name, int)
+def play_the_game(player_name, int, options, options_copy)
   puts "#{player_name}, Please pick an option"
-  display_game_status(OPTIONS)
+  display_game_status(options)
   player_option = gets.chomp
   player_option = player_option.to_i
-  if $options_copy.include?(player_option)
-    $options_copy = $options_copy.reject { |choice| choice == player_option }
-    OPTIONS[player_option - 1] = int.odd? ? 'o' : 'x'
+  if options_copy.include?(player_option)
+    options_copy = options_copy.reject { |choice| choice == player_option }
+    options[player_option - 1] = int.odd? ? 'o' : 'x'
   else
     play_the_game(play_the_game, int)
   end
+  updated_options = [options, options_copy]
+  updated_options
 end
 
 def ask_the_name(player)
@@ -60,13 +63,17 @@ when 'Y'
   9.times do |i|
     if i.odd?
       # second player has to play
-      play_the_game(players[1], i)
+    updated_options = play_the_game(players[1], i, options, options_copy)
+    options = updated_options[0]
+    options_copy = updated_options[1]
     elsif i.even?
       # it's first player's turn
-      play_the_game(players[0], i)
+      play_the_game(players[0], i, options, options_copy)
+      options = updated_options[0]
+      options_copy = updated_options[1]
     end
   end
-  display_game_status(OPTIONS)
+  display_game_status(options)
   # Playing the Game
   # tic_tac_toe_game(player_one, player_two)
 when 'N'
