@@ -8,7 +8,7 @@ class Board
     updated = false
     if @options_checker.include?(option)
       @options_checker = @options_checker.reject {|choice| choice == option}
-      @options[option] = symbol
+      @options[option-1] = symbol
       updated = true
     end
     updated

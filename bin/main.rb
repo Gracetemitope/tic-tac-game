@@ -64,32 +64,38 @@ when 'Y'
   until finished
     puts "#{logic.current_player.name}, please enter a move"
     display_game_status(board.options)
+    player_option = gets.chomp
+    player_option = player_option.to_i
     if j.odd?
       # second player has to play
-      # player_option = play_the_game(player_two.name, player_two.options_to_display)
-      # player_two.update_options(player_option, 'o')
-      # player_one.options_checker = player_two.options_checker
-      # player_one.options_to_display = player_two.options_to_display
+      player_two.options << player_option
+      updated = board.update_board(player_two.symbol, player_option)
+      logic.check_winner(player_two)
+      logic.current_player = player_one
     elsif j.even?
       # it's first player's turn
-      # player_option = play_the_game(player_one.name, player_one.options_to_display)
-      # player_one.update_options(player_option, 'x')
-      # player_two.options_checker = player_one.options_checker
-      # player_two.options_to_display = player_one.options_to_display
+      player_one.options << player_option
+      updated = board.update_board(player_one.symbol, player_option)
+      puts board.options
+      puts updated
+      logic.check_winner(player_one)
+      logic.current_player = player_two
     end
     j += 1
-    finished = true if j >= 9
+    finished = true if j >= 9 || logic.winner != "No winner for this game"
   end
-  puts "It's a drawing move, #{player_one.name} wins the game"
+  # puts "It's a drawing move, #{player_one.name} wins the game"
+  if logic.winner != 'No winner for this game' 
+    puts "It's a winning move, #{logic.winner} wins the game"
+  else
+    puts logic.winner
+  end
 
-  puts "It's a winning move, #{player_two.name} wins the game"
-
-  display_game_status(player_two.options_to_display)
+  display_game_status(board.options)
 when 'N'
   # Compute if it is a draw with conditions
   # Close the game
   puts 'Great! You could check later when youre ready'
 else
   puts 'Incorrect Option, please enter a valid response'
-end
 end
