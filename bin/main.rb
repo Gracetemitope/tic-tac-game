@@ -91,9 +91,10 @@ when 'Y'
     j += 1
     finished = true if j >= 9
   end
+  puts "It's a win"
+  puts 'Player one win the game'
   display_game_status(player_two.options_to_display)
 when 'N'
-  # Compute if it is a win with conditions
   # Compute if it is a draw with conditions
   # Close the game
   puts 'Great! You could check later when youre ready'
