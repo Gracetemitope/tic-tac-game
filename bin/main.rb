@@ -1,20 +1,6 @@
 # !/usr/bin/env ruby
 require_relative '../lib/game_board'
-require_relative '../lib/player'
-
-def display_game_status(options_p)
-  puts '      *       *      '
-  puts "   #{options_p[0]}  *   #{options_p[1]}   *   #{options_p[2]}  "
-  puts '      *       *       '
-  puts '* * * * * * * * * * * '
-  puts '      *       *       '
-  puts "   #{options_p[3]}  *   #{options_p[4]}   *   #{options_p[5]}   "
-  puts '      *       *       '
-  puts '* * * * * * * * * * * '
-  puts '      *       *       '
-  puts "   #{options_p[6]}  *    #{options_p[7]}  *   #{options_p[8]}   "
-  puts '      *       *       '
-end
+require '../lib/players'
 
 def play_the_game(player_name, options)
   puts "#{player_name}, Please pick an option"
