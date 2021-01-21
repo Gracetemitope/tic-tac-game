@@ -93,6 +93,8 @@ when 'Y'
   end
   display_game_status(player_two.options_to_display)
 when 'N'
+  # Compute if it is a win with conditions
+  # Compute if it is a draw with conditions
   # Close the game
   puts 'Great! You could check later when youre ready'
 else
