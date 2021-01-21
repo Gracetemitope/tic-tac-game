@@ -19,6 +19,11 @@ class Player
       update_options(player_option, symbol)
     end
   end
+  public
+  def check_winner_horizontally()
+    if player_option.include?([1, 2, 3]) 
+      puts "Player wins"
+  end
 end
 
 def display_game_status(options_p)
@@ -91,6 +96,8 @@ when 'Y'
     j += 1
     finished = true if j >= 9
   end
+  # if player_option = 1 & player_option = 2 & player_option = 3
+  #   puts "#{play}"
   puts "It's a win"
   puts 'Player one win the game'
   display_game_status(player_two.options_to_display)
@@ -100,4 +107,5 @@ when 'N'
   puts 'Great! You could check later when youre ready'
 else
   puts 'Incorrect Option, please enter a valid response'
+end
 end
