@@ -33,12 +33,16 @@ def ask_the_name(player)
   player_name
 end
 
-# def play_the_game(player_name, options)
-#   puts "#{player_name}, Please pick an option"
-#   display_game_status(options)
-#   player_option = gets.chomp
-#   player_option.to_i
-# end
+def updated_m (player, board, option)
+  updated = board.update_board(player.symbol, option)
+  if !updated
+    puts "Please enter a correct option"
+    optionp = gets.chomp
+    updated_m(player, board, optionp.to_i)
+  else
+    player.options << option
+  end
+end
 
 puts 'Welcome to the TIC TAC TOE game'
 puts '-------------------------------'
@@ -68,16 +72,15 @@ when 'Y'
     player_option = player_option.to_i
     if j.odd?
       # second player has to play
-      player_two.options << player_option
-      updated = board.update_board(player_two.symbol, player_option)
+      updated_m(player_two, board, player_option)
+      # player_two.options << player_option
       logic.check_winner(player_two)
       logic.current_player = player_one
     elsif j.even?
       # it's first player's turn
-      player_one.options << player_option
-      updated = board.update_board(player_one.symbol, player_option)
-      puts board.options
-      puts updated
+      updated_m(player_one, board, player_option)
+      # player_one.options << player_option
+      puts player_one.options
       logic.check_winner(player_one)
       logic.current_player = player_two
     end
