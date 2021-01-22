@@ -88,7 +88,7 @@ when 'Y'
     finished = true if j >= 9 || logic.winner != "It's a draw, No winner for this game"
   end
   # puts "It's a drawing move, #{player_one.name} wins the game"
-  if logic.winner != 'No winner for this game'
+  if logic.winner != "It's a draw, No winner for this game"
     puts "It's a winning move, #{logic.winner} wins the game"
   else
     puts logic.winner
