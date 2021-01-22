@@ -1,6 +1,28 @@
 # !/usr/bin/env ruby
-require_relative '../lib/game_board'
-require_relative '../lib/player'
+class Player
+  attr_accessor :name, :options, :options_to_display, :options_checker
+
+  def initialize(name, options)
+    @name = name
+    @options = options
+    @options_to_display = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @options_checker = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  end
+
+  def update_options(player_option, symbol)
+    if @options_checker.include?(player_option)
+      # update the options_to_display array
+      @options_checker = @options_checker.reject { |choice| choice == player_option }
+      @options_to_display[player_option - 1] = symbol
+      # @options_to_display
+    else
+      puts 'Please select a correct option'
+      player_option_p = gets.chomp
+      player_option_p = player_option_p.to_i
+      update_options(player_option_p, symbol)
+    end
+  end
+end
 
 def display_game_status(options_p)
   puts '      *       *      '
@@ -49,16 +71,14 @@ when 'Y'
   (1..2).each do |i|
     players << ask_the_name("Player number #{i}")
   end
-  # puts players.to_s
   player_one = Player.new(players[0], [])
   player_two = Player.new(players[1], [])
   finished = false
   j = 0
-  puts j
   until finished
     if j.odd?
       # second player has to play
-      player_option = play_the_game(player_two.name, player_one.options_to_display)
+      player_option = play_the_game(player_two.name, player_two.options_to_display)
       player_two.update_options(player_option, 'o')
       player_one.options_checker = player_two.options_checker
       player_one.options_to_display = player_two.options_to_display
@@ -72,10 +92,17 @@ when 'Y'
     j += 1
     finished = true if j >= 9
   end
+<<<<<<< HEAD
   # if player_option = 1 & player_option = 2 & player_option = 3
   #   puts "#{play}"
   puts "It's a win"
   puts 'Player one win the game'
+=======
+  puts "It's a drawing move, #{player_one.name} wins the game"
+
+  puts "It's a winning move, #{player_two.name} wins the game"
+
+>>>>>>> user_interface
   display_game_status(player_two.options_to_display)
 when 'N'
   # Compute if it is a draw with conditions
