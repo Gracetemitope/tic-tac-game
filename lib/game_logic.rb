@@ -1,3 +1,4 @@
+# CyclomaticComplexity Bug
 class GameLogic
   attr_accessor :winner, :current_player
 
@@ -5,6 +6,8 @@ class GameLogic
     @current_player = current_player
     @winner = 'No winner for this game'
   end
+
+  # rubocop:disable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
 
   def check_winner(player)
     # 1,2,3 4,5,6 7,8,9
@@ -18,4 +21,5 @@ class GameLogic
       @winner = player.name
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
 end
