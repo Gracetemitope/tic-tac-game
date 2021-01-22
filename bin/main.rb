@@ -1,10 +1,10 @@
 # !/usr/bin/env ruby
-require_relative '../lib/game_board.rb'
-require_relative '../lib/game_logic.rb'
-require_relative '../lib/players.rb'
+require_relative '../lib/game_board'
+require_relative '../lib/game_logic'
+require_relative '../lib/players'
 
-options = [1,2,3,4,5,6,7,8,9]
-options_checker = [1,2,3,4,5,6,7,8,9]
+options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+options_checker = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def display_game_status(options_p)
   puts '      *       *      '
@@ -60,7 +60,7 @@ when 'Y'
   logic = GameLogic.new(player_one)
   finished = false
   j = 0
- 
+
   until finished
     puts "#{logic.current_player.name}, please enter a move"
     display_game_status(board.options)
@@ -82,10 +82,10 @@ when 'Y'
       logic.current_player = player_two
     end
     j += 1
-    finished = true if j >= 9 || logic.winner != "No winner for this game"
+    finished = true if j >= 9 || logic.winner != 'No winner for this game'
   end
   # puts "It's a drawing move, #{player_one.name} wins the game"
-  if logic.winner != 'No winner for this game' 
+  if logic.winner != 'No winner for this game'
     puts "It's a winning move, #{logic.winner} wins the game"
   else
     puts logic.winner
