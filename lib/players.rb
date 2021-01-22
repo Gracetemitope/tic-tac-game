@@ -1,4 +1,3 @@
-require_relative '../bin/main'
 
 class Player
     attr_accessor :name, :options, :options_to_display, :options_checker
@@ -13,16 +12,14 @@ class Player
     def update_options(player_option, symbol)
       if @options_checker.include?(player_option)
         # update the options_to_display array
-        @options_checker.reject { |choice| choice == player_option }
+        @options_checker = @options_checker.reject { |choice| choice == player_option }
         @options_to_display[player_option - 1] = symbol
+        # @options_to_display
       else
         puts 'Please select a correct option'
-        update_options(player_option, symbol)
+        player_option_p = gets.chomp
+        player_option_p = player_option_p.to_i
+        update_options(player_option_p, symbol)
       end
     end
-    public
-    def check_winner_horizontally()
-      if player_option.include?([1, 2, 3]) 
-        puts "Player wins"
-    end
-  end
+   end
