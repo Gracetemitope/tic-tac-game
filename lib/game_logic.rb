@@ -4,7 +4,7 @@ class GameLogic
 
   def initialize(current_player)
     @current_player = current_player
-    @winner = 'No winner for this game'
+    @winner = "It's a draw, No winner for this game"
   end
 
   # rubocop:disable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
