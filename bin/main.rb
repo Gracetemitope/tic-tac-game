@@ -33,10 +33,10 @@ def ask_the_name(player)
   player_name
 end
 
-def updated_m (player, board, option)
+def updated_m(player, board, option)
   updated = board.update_board(player.symbol, option)
   if !updated
-    puts "Please enter a correct option"
+    puts 'Please enter a correct option'
     optionp = gets.chomp
     updated_m(player, board, optionp.to_i)
   else
