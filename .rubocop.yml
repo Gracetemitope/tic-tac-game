@@ -53,3 +53,5 @@ Metrics/BlockNesting:
   Enabled: false
 Style/Next:
   Enabled: false
+  Style/EndOfLine:
+  EnforcedStyle: lf
