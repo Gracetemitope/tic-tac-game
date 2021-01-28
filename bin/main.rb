@@ -1,28 +1,10 @@
 # !/usr/bin/env ruby
-class Player
-  attr_accessor :name, :options, :options_to_display, :options_checker
+require_relative '../lib/game_board'
+require_relative '../lib/game_logic'
+require_relative '../lib/players'
 
-  def initialize(name, options)
-    @name = name
-    @options = options
-    @options_to_display = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    @options_checker = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  end
-
-  def update_options(player_option, symbol)
-    if @options_checker.include?(player_option)
-      # update the options_to_display array
-      @options_checker = @options_checker.reject { |choice| choice == player_option }
-      @options_to_display[player_option - 1] = symbol
-      # @options_to_display
-    else
-      puts 'Please select a correct option'
-      player_option_p = gets.chomp
-      player_option_p = player_option_p.to_i
-      update_options(player_option_p, symbol)
-    end
-  end
-end
+options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+options_checker = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def display_game_status(options_p)
   puts '      *       *      '
@@ -38,13 +20,6 @@ def display_game_status(options_p)
   puts '      *       *       '
 end
 
-def play_the_game(player_name, options)
-  puts "#{player_name}, Please pick an option"
-  display_game_status(options)
-  player_option = gets.chomp
-  player_option.to_i
-end
-
 def ask_the_name(player)
   puts "#{player}, please put your name"
   player_name = gets.chomp
@@ -58,7 +33,19 @@ def ask_the_name(player)
   player_name
 end
 
-puts 'Welcome to the tic tac toe game'
+def updated_m(player, board, option)
+  updated = board.update_board(player.symbol, option)
+  if !updated
+    puts 'Please enter a correct option'
+    optionp = gets.chomp
+    updated_m(player, board, optionp.to_i)
+  else
+    player.options << option
+  end
+end
+
+puts 'Welcome to the TIC TAC TOE game'
+puts '-------------------------------'
 puts 'Are you ready to play the game ? Y/N'
 
 user_response = gets.chomp
@@ -71,32 +58,43 @@ when 'Y'
   (1..2).each do |i|
     players << ask_the_name("Player number #{i}")
   end
-  player_one = Player.new(players[0], [])
-  player_two = Player.new(players[1], [])
+  player_one = Player.new(players[0], 'X', [])
+  player_two = Player.new(players[1], 'O', [])
+  board = Board.new(options, options_checker)
+  logic = GameLogic.new(player_one)
   finished = false
   j = 0
+
   until finished
+    puts "#{logic.current_player.name}, please enter a move"
+    display_game_status(board.options)
+    player_option = gets.chomp
+    player_option = player_option.to_i
     if j.odd?
       # second player has to play
-      player_option = play_the_game(player_two.name, player_two.options_to_display)
-      player_two.update_options(player_option, 'o')
-      player_one.options_checker = player_two.options_checker
-      player_one.options_to_display = player_two.options_to_display
+      updated_m(player_two, board, player_option)
+      # player_two.options << player_option
+      logic.check_winner(player_two)
+      logic.current_player = player_one
     elsif j.even?
       # it's first player's turn
-      player_option = play_the_game(player_one.name, player_one.options_to_display)
-      player_one.update_options(player_option, 'x')
-      player_two.options_checker = player_one.options_checker
-      player_two.options_to_display = player_one.options_to_display
+      updated_m(player_one, board, player_option)
+      # player_one.options << player_option
+      puts player_one.options
+      logic.check_winner(player_one)
+      logic.current_player = player_two
     end
     j += 1
-    finished = true if j >= 9
+    finished = true if j >= 9 || logic.winner != "It's a draw, No winner for this game"
   end
-  puts "It's a drawing move, #{player_one.name} wins the game"
+  # puts "It's a drawing move, #{player_one.name} wins the game"
+  if logic.winner != "It's a draw, No winner for this game"
+    puts "It's a winning move, #{logic.winner} wins the game"
+  else
+    puts logic.winner
+  end
 
-  puts "It's a winning move, #{player_two.name} wins the game"
-
-  display_game_status(player_two.options_to_display)
+  display_game_status(board.options)
 when 'N'
   # Compute if it is a draw with conditions
   # Close the game
