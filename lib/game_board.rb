@@ -2,7 +2,6 @@ class Board
   attr_accessor :options, :options_checker
 
   def initialize(options, options_checker)
-
     @options = options
     @options_checker = options_checker
   end
